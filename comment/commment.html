@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #F2F3F5;
+        }
+
+        h1{
+            text-align: center;
+        }
+        
+        div{
+            font-size: 18px;
+            margin: 20px auto;
+        }
+
+        p{
+            font-size: 18px;
+            margin: 15px auto;
+            padding: 5px;
+            background-color: rgb(240,245,253);
+        }
+
+        input,button{
+            font-size: 20px;
+        }
+        
+        .submit-comment{
+            text-align: center;
+        }
+        .post{
+            text-align: center;
+            padding: 0px;
+        }
+        .mine{
+            background-color: rbg(253,253,240);
+        }
+        .wrapper{
+            width: 500px;
+            border: olivedrab 2px solid;
+            background-color: #fff;
+            padding: 0px;
+        }
+        .nameDiv{
+            text-align: left;
+            padding-left: 10px;
+        }
+        .name{
+            position: relative;
+            bottom: 25px;
+            left: 10px;
+        }
+        .time{
+            position: relative;
+            font-size: 12px;
+            left: -45px;
+            bottom: 5px;
+        }
+        .profile-img{
+            border-radius: 50%;
+            width: 50px;
+        }
+        .description{
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px 10px;
+            text-align: left;
+        }
+        #commentCountDiv{
+            text-align: right;
+            padding-right: 23px;
+            font-size: 18px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Javascript入門課程 - 加入留言</h1>
+    <div class="wrapper">
+        <div class="post">
+            <div class="nameDiv">
+                <img class="profile-img" src="" alt="">
+                <span class="name">文家俊</span><span class="time">1小時之前</span>
+            </div>
+
+            <img src="" width="500px" alt="JS入門">
+            <div class="description">Cyrusman.hk</div><br>為什麼這可能是最好的網路</div>
+        </div>
+        <div id="commentCounDiv"><span id="commentcount">3</span>條留言</div>
+
+        <div id="comment">
+            <p>文家俊：你覺得日本人西唔西</p>
+            <p>文家俊：你覺得日本人自唔自私</p>
+            <p>文家俊：你重想點</p>
+        </div>
+        <div class="submit-comment">
+            <input type="text" name="請輸入留言" id="comment">
+            <button>留言</button>
+        </div>
+    </div>
+
+    <script src="commment.js"></script>
+</body>
+</html>
