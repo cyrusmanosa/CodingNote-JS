@@ -39,22 +39,22 @@ const registerUser = async (req, res) => {
 // login controller
 const loginUser = async (req, res) => {
     try {
-        const { usename, password } = req.body;
-        const exitinigUser = await User.findOne({ usename });
+        const { username, password } = req.body;
+        const exitinigUser = await User.findOne({ username });
         if (!exitinigUser) {
-            return res.status(400).json({ success:false ,message: 'User does not exist' });
+            return res.status(400).json({ success:false ,message: 'Invalid credentials !!' });
         }
 
         const isPasswordValid = await bcrypt.compare(password, exitinigUser.password);
 
         if (!isPasswordValid){
-            return res.status(400).json({ success:false ,message: 'Password is incorrect' });
+            return res.status(400).json({ success:false ,message: 'Invalid credentials !!' });
         }else{
             const accessToken = jwt.sign({ 
                 _id: exitinigUser._id,
                 username: exitinigUser.username, 
                 role: exitinigUser.role,
-            }, process.env.JWT_SECRET, { 
+            }, process.env.JWT_SECRET_KEY, { 
                 expiresIn: '6h' 
             });
 
@@ -65,7 +65,7 @@ const loginUser = async (req, res) => {
             });
         }
     } catch (error) {
-        console.log('Error lpgin user:', error);
+        console.log('Error lopgin user:', error);
         res.status(500).json({ success:false ,message: 'Error registering user', error });
     }
 }
