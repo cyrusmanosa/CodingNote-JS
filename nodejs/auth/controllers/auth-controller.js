@@ -51,7 +51,7 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ success:false ,message: 'Invalid credentials !!' });
         }else{
             const accessToken = jwt.sign({ 
-                _id: exitinigUser._id,
+                userId: exitinigUser._id,
                 username: exitinigUser.username, 
                 role: exitinigUser.role,
             }, process.env.JWT_SECRET_KEY, { 
@@ -70,5 +70,45 @@ const loginUser = async (req, res) => {
     }
 }
 
+// change Password controller
+const changePassword = async(req,res)=>{
+    try {
+        const userId = req.userInfo.userId;
+        const { oldPassowrd, newPassword } = req.body;
+        const userData = await User.findById(userId);
+        if (!userData){
+            return res.status(400).json({
+                success: false,
+                message: "not found"
+            })
+        }
+        const isPasswordValid = await bcrypt.compare(oldPassowrd, userData.password);
+        if (!isPasswordValid){
+            return res.status(400).json({
+                success: false,
+                message: "Old password not match"
+            })
+        }else{
+            const salt = await bcrypt.genSalt(10);
+            const newPwHash = await bcrypt.hash(newPassword, salt);
+            userData.password = newPwHash
+            await userData.save();
 
-module.exports = { registerUser, loginUser };
+            return res.status(200).json({
+                success: true,
+                message: "password changed !!"
+            })
+        }
+        
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            message: ""
+        })
+    }
+}
+
+
+module.exports = { registerUser, loginUser, changePassword };
