@@ -18,6 +18,7 @@ io.on("connection",(socket) =>{
     socket.on('join',(userName)=>{
         users.add(userName);
         socket.userName = userName;
+        
         // broadcast to all clients/users that a new user has joined
         io.emit('userJoined',userName);
         // send the updated user list all client
