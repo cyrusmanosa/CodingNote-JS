@@ -1,23 +1,54 @@
-// npm init -y ,  npm i typescript @types/node ts-node , npx tsc --init
+import express , { Express , Request , Response , NextFunction} from 'express';
+import { User, IUser } from './models/User';
 
-import { log } from "node:console";
+const app : Express = express();
+const port = 3000;
 
-log('Hello Node js from typescript');
+app.use(express.json());
 
-// Basic Type
-
-let isDone : Boolean = false
-let num : number = 100
-let str : string = "Man"
-let list : number[] = [ 1 , 2 , 3 ]
-let products : Array<string> = ['product1','product2','product3']
-
-let randomVal : any = 4
-let xyz : undefined = undefined
-let yyy : null = null
-
-enum Color {
-    Red, Green, Blue
+interface CustomRequest extends Request {
+    startTime? : number
 }
 
-let d : Color = Color.Green
+//middleware -> add startTime to request
+app.use((req : CustomRequest, res : Response, next : NextFunction) => {
+    req.startTime = Date.now();
+    next()
+})
+
+app.get('/', (req : Request , res : Response) => {
+    res.send('Hello Typescript with express!');
+})
+
+app.get("/users" , async(req: Request, res: Response) => {
+    try {
+        const users: IUser[] = await User.find()
+    } catch (error) {
+        res.status(400).json({message:'Some error occured!!'})
+    }
+})
+
+// post route -> new user -> name , email -> req.body
+// -> /user/:id -> Request <{},{},{},{}>
+
+interface User {
+    name : string,
+    email : string
+}
+
+app.post('/user', (req: Request<{}, {}, User>, res: Response) => {
+    const { name, email } = req.body
+    res.json({
+        message: `User created  with name ${name} and email ${email}`
+    })
+})
+
+// users based on id
+app.get('/users/:id', (req: Request<{id : string}>, res : Response) => {
+    const { id } = req.params;
+    res.json({message : `User with id ${id}`})
+})
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+})
