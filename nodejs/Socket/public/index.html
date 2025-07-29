@@ -27,28 +27,26 @@
         const messageForm = document.getElementById('message-form');
         const messageInput = document.getElementById('message-input');
 
-
         // input box 
         const userName = prompt('Enter your username');
-
         socket.emit('join',userName)
         
         socket.on("userJoined",(user)=>{
             addMessage(`${user} has joined the chat`);
-        })
+        });
 
         socket.on('userLeft',(user)=>{
             addMessage(`${user} has left the chat`);
-        })
+        });
 
         socket.on("userList",(users)=>{
             usersList.innerHTML = users.map(user => `<li>${user}</li>`).join("");
-        })
+        });
 
         // Listen for chatmessage events from the server
         socket.on('chatMessage',(message)=>{
-            addMessage(`${message.userName}:${message.text}`)
-        })
+            addMessage(`${message.userName}:${message.text}`);
+        });
 
          // handle form submisson
          messageForm.addEventListener('submit', (e)=>{
@@ -61,7 +59,7 @@
                 })
                 messageForm.text = '';
             }
-         })
+         });
 
         function addMessage(input){
             const messageElement = document.createElement('div');
@@ -70,7 +68,6 @@
             // scroll to the bottom of the chat container
             chat.scrollTop = chat.scrollHeight;
         }
-
     </script>
 </body>
 </html>

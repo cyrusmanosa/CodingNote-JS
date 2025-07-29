@@ -7,7 +7,6 @@ const createAuthor = async(req,res)=>{
         const author = await Author(req.body);
         await author.save();
 
-
         res.status(201).json({
             success: true,
             data: author
@@ -26,7 +25,6 @@ const createBook = async(req,res)=>{
     try {
         const book = await Book(req.body);
         await book.save();
-
 
         res.status(201).json({
             success: true,
@@ -54,12 +52,10 @@ const getBookWithAuthor = async(req,res)=>{
             })
         }
 
-
         res.status(201).json({
             success: true,
             data: book,
         })
-        
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -68,8 +64,6 @@ const getBookWithAuthor = async(req,res)=>{
         })
     }
 }
-
-
 
 module.exports = {
     createAuthor,

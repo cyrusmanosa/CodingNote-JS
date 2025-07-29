@@ -71,8 +71,6 @@ const DeleteBook = async (req, res) => {
         console.error('Error deleting book:', error);
         return res.status(500).json({ message: 'Error deleting book', error: error.message });
     }
-    
-    
 }
 
 module.exports = { getAllBooks, getBookById, addBook, updateBook, DeleteBook };

@@ -14,6 +14,7 @@ const users = new Set();
 
 io.on("connection",(socket) =>{
     console.log("A user is now connected");
+    
     // handle users when they will join the chat
     socket.on('join',(userName)=>{
         users.add(userName);
@@ -21,10 +22,10 @@ io.on("connection",(socket) =>{
         
         // broadcast to all clients/users that a new user has joined
         io.emit('userJoined',userName);
+
         // send the updated user list all client
         io.emit('userList',Array.from(users));
     })
-
 
     // handle incoming chat message
     socket.on('chatMessage',(message)=>{
@@ -42,13 +43,10 @@ io.on("connection",(socket) =>{
             }
         })
     })
+    
 });
 
-
-
 // handle user disco
-
-
 const PORT = 3000;
 server.listen(PORT,()=>{
     console.log('Server is now running');
