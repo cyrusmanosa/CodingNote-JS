@@ -33,10 +33,7 @@ const resolvers = {
             const index = products.findIndex( product => product.id === id)
             if (index === -1) return null
 
-            const updateProduct = {
-                ...products[index],
-                ...updates,
-            };
+            const updateProduct = {...products[index],...updates};
             
             products[index] = updateProduct;
 

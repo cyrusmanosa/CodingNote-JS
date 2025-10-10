@@ -2,7 +2,6 @@ const express = require('express');
 const socketIo = require('socket.io');
 const http = require('http');
 
-
 // initiate socket.io and attch this to the http server
 // emit => on; [server to client or client to server 都得]
 const app = express();
