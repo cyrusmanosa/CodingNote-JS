@@ -1,19 +1,19 @@
 {
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "cloudinary": "^2.6.0",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.13.2",
-    "multer": "^1.4.5-lts.2",
-    "nodemon": "^3.1.9"
+    "cloudinary": "^2.8.0",
+    "dotenv": "^16.6.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.21.0",
+    "multer": "1.4.5-lts.2",
+    "nodemon": "^3.1.11"
   },
   "name": "auth",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "build":"npm install",
+    "build": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "dev": "nodemon server.js"
